@@ -1,0 +1,46 @@
+# PRZYJAZNE ADRESY
+
+RewriteEngine On  # [L] nie szuka dalej
+
+
+# $_GET['klasa'] = "Rejestracja"
+RewriteRule ^formularz-rejestracji/?$ index.php?klasa=Dostep&funkcja=rejestracjaFormularz [L]
+RewriteRule ^rejestracja/?$ index.php?klasa=Dostep&funkcja=rejestracja [L]
+
+# $_GET['klasa'] = "Dostep"
+RewriteRule ^formularz-logowania/?$ index.php?klasa=Dostep&funkcja=logowanieFormularz [L]
+RewriteRule ^logowanie/?$ index.php?klasa=Dostep&funkcja=logowanie [L]
+RewriteRule ^wylogowanie/?$ index.php?klasa=Dostep&funkcja=wylogowanie [L]
+
+
+# $_GET['klasa'] = "KlientZalogowany"
+RewriteRule ^/?$ index.php?klasa=Start&funkcja=powitanie [L]
+
+RewriteRule ^prace-domowe/?$ index.php?klasa=PracaDomowa&funkcja=lista [L]
+RewriteRule ^moje-prace/?$ index.php?klasa=PracaDomowa&funkcja=listaMoichPrac [L]
+
+##################################################################################################
+### // TODO: Linki do wszystkich funkcji w klasie Wykladowca                                   ###
+### // TODO: Linki do niektórych funkcji w klasie PracaDomowa (np. dodajRozwiazanieFormularz)  ###
+##################################################################################################
+
+
+# RewriteRule ^home$ index.php?klasa=KlientZalogowany&funkcja=powitanie [L]
+# RewriteRule ^wyloguj$ index.php?klasa=Dostep&funkcja=wylogowanie [L]
+# RewriteRule ^login$ index.php?klasa=KlientZalogowany&funkcja=powitanie [L]
+# #RewriteRule ^wyloguj$ index.php?klasa=Glowna&funkcja=powitanie [L]
+#
+# RewriteRule ^listopad-2019/?$ index.php?klasa=KlientZalogowany&funkcja=powitanie&kategoria=1 [L]
+# RewriteRule ^grudzien-2019/?$ index.php?klasa=KlientZalogowany&funkcja=powitanie&kategoria=2 [L]
+# RewriteRule ^styczen-2020/?$ index.php?klasa=KlientZalogowany&funkcja=powitanie&kategoria=3 [L]
+
+
+# $_GET['klasa'] = "Koszyk"
+# (\d+) "\d"oznacza cyfrę a plus oznacza jeden lub więcej takich znaków, np. 3 lub 123
+#          w tym wypadku to cyfry/liczby na końcu linku do zdjęcia: $1=/1,lub,/3 lub /123
+#           które jest dodawane do koszyka, i oznaczające jego:'id'
+# RewriteRule ^dodaj-do-koszyka/(\d+)$ index.php?klasa=Koszyk&funkcja=dodaj&id=$1 [L]
+# RewriteRule ^koszyk$ index.php?klasa=Koszyk&funkcja=koszyk [L]
+# RewriteRule ^usun-z-koszyka/(\d+)$ index.php?klasa=Koszyk&funkcja=usun&id=$1 [L]
+# RewriteRule ^usun-wszystko-z-koszyka/?$ index.php?klasa=Koszyk&funkcja=usunWszystko [L]
+#RewriteRule ^pokaz_koszyk/?$ index.php?klasa=Koszyk&funkcja=pokaz_koszyk[L]
