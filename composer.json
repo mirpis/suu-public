@@ -1,0 +1,12 @@
+{
+    "require": {
+        "kint-php/kint": "3.1"
+    },
+    "autoload": { // skąd ma PHP ładować
+        "psr-4": {
+          "Klasy\\": "Klasy/",
+          "Config\\": "config/"
+        }
+    }
+}
+//żeby dostać się do:"Klasy/" trzeba wpisać: "Klasy\\"
