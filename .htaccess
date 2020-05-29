@@ -20,8 +20,12 @@ RewriteRule ^prace-domowe/?$ index.php?klasa=PracaDomowa&funkcja=lista [L]
 RewriteRule ^moje-prace/?$ index.php?klasa=PracaDomowa&funkcja=listaMoichPrac [L]
 
 ##################################################################################################
-### // TODO: Linki do wszystkich funkcji w klasie Wykladowca                                   ###
-### // TODO: Linki do niektórych funkcji w klasie PracaDomowa (np. dodajRozwiazanieFormularz)  ###
+
+### // TODO: Linki do niektórych funkcji w klasie PracaDomowa (np. dodajRozwiazanieFormularz)
+
+
+### // TODO: Linki do wszystkich funkcji w klasie Wykladowca
+RewriteRule ^lista-rozwazan/?$ index.php?klasa=Wykladowca&funkcja=listaRozwiazan [L]
 ##################################################################################################
 
 

@@ -72,7 +72,8 @@ class Dostep
         $zapytanie = 'SELECT * FROM `uzytkownik` WHERE `login` = :login AND `haslo` = :haslo';
         $obiektZapytania = $bazaDanych->pdo->prepare($zapytanie);
         $obiektZapytania->bindValue(':login', $login, \PDO::PARAM_STR);
-        $obiektZapytania->bindValue(':haslo', md5($login.md5($haslo)), \PDO::PARAM_STR);
+        $obiektZapytania->bindValue(':haslo', $haslo, \PDO::PARAM_STR);
+      //  $obiektZapytania->bindValue(':haslo', md5($login.md5($haslo)), \PDO::PARAM_STR);
 
         if (!$obiektZapytania->execute()) {
             // TODO: Wypisać komunikat użytkownikowi że nie udało się zalogować
