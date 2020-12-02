@@ -2,6 +2,9 @@
 namespace Config;
 
 use PDO;
+/**
+ *
+ */
 
 /**
  * Klasa połaczenia z bazą danych
