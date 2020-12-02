@@ -1,107 +1,82 @@
+<?php
+echo '
+<style type="text/css">
+  <img class="sticky" src="https://jestwiecej.pl/wp-content/uploads/2019/04/logo-bw.png"
+   alt="Logo" style="height: 100%;">
+</style>
+  <a href="'.\Config\Ustawienia::get('appUrl').'formularz-logowania/">Zaloguj</a>
+  <a href="'.\Config\Ustawienia::get('appUrl').'formularz-rejestracji/">Zarejestruj</a>
 
-<div class="col-md-12 bg-white text-white ">
-  <img src="../img/74209251_2435958553308572_1469647597198114816_n.jpg" class="card-img" alt="Responsive image"> -->
- <div class="card-img-overlay max-width">
-    <!-- <h5 class="card-title">Card title</h5> -->
-    <!-- <h1 class="row app-title text-olive display-2">SUU
-       <p class="h6 text-white col-sm-3">Szkoła Uzdrowienia i Uwolnienia</p>
-    </h1> -->
-   <div class="d-flex flex-row justify-content-end">
-    <ul class="nav ">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">O nas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Kontakt</a>
-      </li>
-    <!-- <div class="d-flex flex-row"> -->
+    Witaj '.\Klasy\Sesja::get('imie').' '.\Klasy\Sesja::get('nazwisko').'
+  <a href="'.\Config\Ustawienia::get('appUrl').'wylogowanie/">Wyloguj</a>
+';
 
-            <!-- <ul class="navbar-nav mr-auto"> -->
-      <li class="nav-item">
-        <?php
-         if (isset($_SESSION['id'])) {
-         ?>
-          <a class="nav-item nav-link active">Witaj <?php echo $_SESSION['id']; ?></a>
+if (\Klasy\Sesja::get('id') !== null)
+ {
+    echo '
+      <a href="'.\Config\Ustawienia::get('appURL').'prace-domowe-zadane/">Prace domowe zadane</a>
+      <a href="'.\Config\Ustawienia::get('appURL').'moje-prace/">Moje prace</a>
+      <a href="'.\Config\Ustawienia::get('appURL').'dodaj-rozwiazanie-formularz/">Dodaj rozwiązanie formularz</a>
+      <a href="'.\Config\Ustawienia::get('appURL').'dodaj-rozwiazanie/">Dodaj rozwiązanie</a>
 
-        <div class="col-md-12 bg-white text-white ">
-            <img src="../img/74209251_2435958553308572_1469647597198114816_n.jpg" class="card-img" alt="Responsive image"> -->
-         <div class="card-img-overlay max-width">
-
-            </li>
-            <li class="nav-item">
-                <a class="nav-item nav-link active" href="<?php echo APP_URL ?>wyloguj">Wyloguj</a>
-            </li>
-
-        </div>
-       </div>
-
-      <li class="nav-item">
-         <?php
-         } else {
-         ?>
-           <a class="nav-item nav-link active" href="<?php echo APP_URL ?>zaloguj">Zaloguj</a>
-      </li>
-      <li class="nav-item">
-           <a class="nav-item nav-link active" href="<?php echo APP_URL ?>zarejestruj">Rejestracja</a>
-
-         <?php
-         }
-       ?>
-      </li>
-
-    </ul>
-   </div>
-
-   <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-danger py-3 sticky-top">
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button> -->
-
-  <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto d-flex justify-content-around"> -->
-            <!-- <li class="nav-item">
-              <a class="nav-link active" href="#">Start</a>
-            </li>
-
-            <li class="nav-item">
-               <a class="nav-link active" href="#">Kontakt</a>
-            </li>
-
-            <li class="nav-item">
-               <a class= "nav-link active" href="#">O nas</a>
-            </li>
-          </ul> -->
-
-          <!-- <div class="d-flex flex-row">
-
-                <ul class="navbar-nav mr-auto"> -->
-
-                 <!-- <?php
-                  //if (isset($_SESSION['id'])) {
-                  ?>
-                   <a class="nav-item nav-link active">Witaj <?php //echo $_SESSION['id']; ?></a>
-                   <a class="nav-item nav-link active" href="<?php //echo APP_URL ?>wyloguj">Wyloguj</a>
+      <a href="'.\Config\Ustawienia::get('appURL').'lista-rozwazan/">Lista rozwiązań</a>
+      <a href="'.\Config\Ustawienia::get('appURL').'lista-prac-domowych/">Lista prac domowych</a>
+      <a href="'.\Config\Ustawienia::get('appURL').'nowa-praca-domowa-formularz/">Nowa praca domowa formularz</a>
+      <a href="'.\Config\Ustawienia::get('appURL').'usun-prace-domowa/">Usuń pracę domową</a>
+ ';
+}
+ ?>
 
 
+<!-- <div class="col-md-12   text olive ">
+
+    <h1 class="row ">
+
+      <p class="h2 col-sm-4">SUU Szkoła Uzdrowienia i Uwolnienia</p>
+
+      <div class="h2 col-sm-8  d-flex   justify-content-end">
+
+           <ul class="nav  justify-content-end ">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">O nas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Kontakt</a>
+                </li>
+
+                <li class="nav-item">
                   <?php
-                //} else {
-                  ?>
-                    <a class="nav-item nav-link active" href="<?php //echo APP_URL ?>zaloguj">Zaloguj</a>
-                    <a class="nav-item nav-link active" href="<?php //echo APP_URL ?>zarejestruj">Rejestracja</a>
-                  <?php
-                //  }
-                ?> -->
-              <!-- </ul>
-          </div> -->
-        <!-- </div> -->
-     <!-- </nav> -->
-  </div>
+                   // if (isset($_SESSION['id'])) {
+                   ?>
+                   <a class="nav-item nav-link active">Witaj <?php // echo $_SESSION['id']; ?></a>
 
-</div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link active" href="<?php //echo APP_URL ?>wyloguj">Wyloguj</a>
+                </li>
+                <li class="nav-item">
+                   <?php
+                   //} else {
+                   ?>
+                     <a class="nav-item nav-link active" href="<?php //echo APP_URL ?>zaloguj">Zaloguj</a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-item nav-link active" href="<?php //echo APP_URL ?>zarejestruj">Rejestracja</a>
+
+                   <?php
+                   //}
+                   ?>
+                </li>
+
+           </ul>
+      </div>
+    </h1>
+
+</div> -->
+
+
+
 
 <!-- <div class="col-md-12">
-<img src="../img/74209251_2435958553308572_1469647597198114816_n.jpg" class="card-img" alt="Responsive image">
+ <img src="../img/74209251_2435958553308572_1469647597198114816_n.jpg" class="card-img" alt="Responsive image">
 </div> -->

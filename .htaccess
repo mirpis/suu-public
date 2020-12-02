@@ -16,24 +16,31 @@ RewriteRule ^wylogowanie/?$ index.php?klasa=Dostep&funkcja=wylogowanie [L]
 # $_GET['klasa'] = "KlientZalogowany"
 RewriteRule ^/?$ index.php?klasa=Start&funkcja=powitanie [L]
 
-RewriteRule ^prace-domowe/?$ index.php?klasa=PracaDomowa&funkcja=lista [L]
+
+### // TODO: Linki do niektórych funkcji w klasie PracaDomowa (np. dodajRozwiazanieFormularz)
+RewriteRule ^prace-domowe-zadane/?$ index.php?klasa=PracaDomowa&funkcja=praceDomoweZadane [L]
 RewriteRule ^moje-prace/?$ index.php?klasa=PracaDomowa&funkcja=listaMoichPrac [L]
+RewriteRule ^dodaj-rozwiazanie-formularz/(\d+)/?$ index.php?klasa=PracaDomowa&funkcja=dodajRozwiazanieFormularz&id=$1 [L]
+RewriteRule ^dodaj-rozwiazanie/?$ index.php?klasa=PracaDomowa&funkcja=dodajRozwiazanie [L]
 
 ##################################################################################################
 
-### // TODO: Linki do niektórych funkcji w klasie PracaDomowa (np. dodajRozwiazanieFormularz)
-
-
 ### // TODO: Linki do wszystkich funkcji w klasie Wykladowca
 RewriteRule ^lista-rozwazan/?$ index.php?klasa=Wykladowca&funkcja=listaRozwiazan [L]
+RewriteRule ^lista-prac-domowych/?$ index.php?klasa=Wykladowca&funkcja=listaPracDomowych [L]
+RewriteRule ^nowa-praca-domowa-formularz/?$ index.php?klasa=Wykladowca&funkcja=nowaPracaDomowaFormularz [L]
+RewriteRule ^nowa-praca-domowa/?$ index.php?klasa=Wykladowca&funkcja=nowaPracaDomowa [L]
+RewriteRule ^usun-prace-domowa/?$ index.php?klasa=Wykladowca&funkcja=usunPracaDomowa [L]
+
+
 ##################################################################################################
 
 
 # RewriteRule ^home$ index.php?klasa=KlientZalogowany&funkcja=powitanie [L]
 # RewriteRule ^wyloguj$ index.php?klasa=Dostep&funkcja=wylogowanie [L]
 # RewriteRule ^login$ index.php?klasa=KlientZalogowany&funkcja=powitanie [L]
-# #RewriteRule ^wyloguj$ index.php?klasa=Glowna&funkcja=powitanie [L]
-#
+# RewriteRule ^wyloguj$ index.php?klasa=Glowna&funkcja=powitanie [L]
+
 # RewriteRule ^listopad-2019/?$ index.php?klasa=KlientZalogowany&funkcja=powitanie&kategoria=1 [L]
 # RewriteRule ^grudzien-2019/?$ index.php?klasa=KlientZalogowany&funkcja=powitanie&kategoria=2 [L]
 # RewriteRule ^styczen-2020/?$ index.php?klasa=KlientZalogowany&funkcja=powitanie&kategoria=3 [L]

@@ -40,6 +40,6 @@ class Glowna
       //             -> wywołujemy
       //             $akcja-cję - funkcję"powitanie"
 
-      d($_SESSION);
+      // d($_SESSION);
      }
 }

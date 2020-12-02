@@ -26,7 +26,8 @@ class PracaDomowa
           $prace .= '
             <tr>
               <td>'.$pracaDomowa['data_zadania'].'</td>
-              <td>'.$pracaDomowa['tytul'].'</td>
+              <td>'.$pracaDomowa['temat'].'</td>
+              <td><a href="'.Ustawienia::get('appURL').'/dodaj-rozwiazanie-formularz/'.$pracaDomowa['id'].'/">Dodaj rozwiązanie</a></td>
             </tr>';
         }
 
@@ -38,6 +39,7 @@ class PracaDomowa
               <tr>
                 <td>Data zadania</td>
                 <td>Tytuł</td>
+                <td>Akcje</td>
               </tr>
             </thead>
 
@@ -58,19 +60,54 @@ class PracaDomowa
         // do obecnie zalogowanego użytkownika (poprzez jego id z sesji)
         // Wykorzystać klasę Database, Sesja
 
-        // TODO: Wypisać na ekran prace - funkcja echo
-
         $idUzytkownika = Sesja::get('id');
-        // $idPracyDomowej = $_POST['id-pracy-domowej'];
-        // $dataZadania = $_POST['data_zadania'];
-        // $tresc = $_POST['temat'];
-
+// d($idUzytkownika);
         $bazaDanych = new Database();
         $bazaDanych->connect();
 
-        $zapytanie = 'SELECT * FROM `praca_domowa` WHERE id = uzytkownik_id';
+        $zapytanie = "SELECT
+          `praca_domowa`.*,
+          roz.tresc,
+          roz.data_przeslania
+        FROM `praca_domowa`
+        RIGHT JOIN `rozwiazanie` roz ON roz.`praca_domowa_id` = `praca_domowa`.`id`
+        WHERE `roz`.uzytkownik_id = :id"; // :id to BINDA
 
-        \header('Location: '.Ustawienia::get('appURL'));
+        $praceDomowe = $bazaDanych->query($zapytanie, [":id" => $idUzytkownika]);
+// d($praceDomowe);
+
+        // TODO: Wypisać na ekran prace - funkcja echo
+
+        $wierszePracDomowych = '';
+
+        foreach ($praceDomowe as $pracaDomowa) {
+          $wierszePracDomowych .= '
+            <tr>
+              <td>'.$pracaDomowa['id'].'</td>
+              <td>'.$pracaDomowa['data_zadania'].'</td>
+              <td>'.$pracaDomowa['temat'].'</td>
+              <td>'.$pracaDomowa['data_przeslania'].'</td>
+              <td>'.$pracaDomowa['tresc'].'</td>
+            </tr>
+          ';
+        }
+
+        echo '
+          <table border=1>
+            <thead>
+              <tr>
+                <td>Id pracy domowej</td>
+                <td>Data zadania</td>
+                <td>Temat</td>
+                <td>Data przesłania</td>
+                <td>Treść</td>
+              </tr>
+            </thead>
+            <tbody>
+              '.$wierszePracDomowych.'
+            </tbody>
+          </table>
+        ';
     }
 
     /**
@@ -79,6 +116,13 @@ class PracaDomowa
     public function dodajRozwiazanieFormularz()
     {
         $idPracyDomowej = $_GET['id'];
+//d($_GET);
+        $db = new Database();
+        $db->connect();
+        //                                                              BINDA
+        // $pracaDomowa = $db->query('SELECT * FROM praca_domowa where id = ?', [$idPracyDomowej]);
+        $pracaDomowa = $db->query('SELECT * FROM praca_domowa where id = :id', [":id" => $idPracyDomowej]);
+        $pracaDomowa = $pracaDomowa[0];
 
         // TODO: Wyświetlenie formularza dodawania rozwiązania
         // Identyfikator pracy domowej musi się pojawić w formularzu:
@@ -89,10 +133,8 @@ class PracaDomowa
         echo '
           <form action="'.Ustawienia::get('appURL').'dodaj-rozwiazanie/" method="POST">
               <input type="hidden" name="id-pracy-domowej" value="'.$idPracyDomowej.'">
-              <input type="text" name="praca_domowa_nr" placeholder="Praca_domowa_nr">
-              <input type="text" name="uzytkownik_id" placeholder="Uzytkownik_id">
-              <input type="text" name="temat" placeholder="Temat">
-              <input type="text" name="tresc" placeholder="Treść">
+              <input type="text" name="temat" value="'.$pracaDomowa['temat'].'" readonly disabled>
+              <textarea name="tresc" placeholder="Treść" rows=5 cols=10></textarea>
               <input type="submit">
           </form>
         ';
@@ -103,15 +145,12 @@ class PracaDomowa
      */
     public function dodajRozwiazanie()
     {
-        $idUzytkownika = Sesja::get('id');
-        $uzytkownik_id = $_POST['uzytkownik_id'];
+        $idUzytkownika = Sesja::get('id'); // Użytkownik nie widzi tej wartości
 
-        $idPracyDomowej = $_POST['id-pracy-domowej'];
-        $praca_domowa_nr = $_POST['praca_domowa_nr'];
+        $idPracyDomowej = $_POST['praca_domowa_id']; // To przesyłamy z formularza z ukrytego pola
 
-        $temat = $_POST['temat'];
         $tresc = $_POST['tresc'];
-
+//d($_POST);
         $dataPrzeslania = date('Y-m-d H:i:s');
 
         // TODO: Utworzyć w tabeli rozwiazanie nowego rozwiązania na podstawie danych zebranych powyżej
@@ -124,24 +163,18 @@ class PracaDomowa
         $bazaDanych = new Database();
         $bazaDanych->connect();
 
-        $zapytanie = 'INSERT INTO `praca_domowa` (`uzytkownik_id`, `haslo`, `imie`, `nazwisko`) VALUES (:uzytkownik_id, :haslo, :imie, :nazwisko)';
-        $obiektZapytania = $bazaDanych->pdo->prepare($zapytanie);
-        $obiektZapytania->bindValue(':login', $login, \PDO::PARAM_STR);
-        $obiektZapytania->bindValue(':haslo', md5($login.md5($haslo)), \PDO::PARAM_STR);
-        $obiektZapytania->bindValue(':imie', $imie, \PDO::PARAM_STR);
-        $obiektZapytania->bindValue(':nazwisko', $nazwisko, \PDO::PARAM_STR);
+        $zapytanie = 'INSERT INTO `rozwiazanie` (
+          `uzytkownik_id`, `praca_domowa_id`, `tresc`, `data_przeslania`
+        ) VALUES (?, ?, ?, ?)';
 
-        $obiektZapytania->execute();
-
-        header('Location: '.Ustawienia::get('appURL').'moje-prace/');
-
+        $wynikZapytania = $bazaDanych->query($zapytanie, [$idUzytkownika, $idPracyDomowej, $tresc, $dataPrzeslania]);
 
         if ($wynikZapytania > 0) {
-            Wiadomosc::sukces('Pomyślnie dodano rozwiązanie!');
-            header('Location: ' . Ustawienia::get('appURL') . 'moje-prace');
-          } else {
-            Wiadomosc::blad('Wystąpił błąd podczas dodawania rozwiązania!');
-            header('Location: ' . Ustawienia::get('appURL') . 'dodaj-rozwiazanie-formularz');// http:localhost/zarejestruj
-          }
+          Wiadomosc::sukces('Pomyślnie dodano rozwiązanie!');
+          header('Location: ' . Ustawienia::get('appURL') . 'moje-prace');
+        } else {
+          Wiadomosc::blad('Wystąpił błąd podczas dodawania rozwiązania!');
+          header('Location: ' . Ustawienia::get('appURL') . 'dodaj-rozwiazanie-formularz');// http:localhost/zarejestruj
+        }
     }
 }

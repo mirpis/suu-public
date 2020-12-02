@@ -16,8 +16,6 @@ class Wykladowca
     public function listaRozwiazan()
     {
         // TODO: Wypisanie na ekranie listy elementów z tabeli rozwiazanie.
-        // - klasa Database do pobrania danych, echo 'tresc strony';
-        // Jak pobrać dane można zobaczyć w logowaniu - SELECT * FROM itd.
 
         $baza= new Database();
         $baza->connect();
@@ -30,7 +28,7 @@ class Wykladowca
           $prace .= '
             <tr>
               <td>'.$rozwiazanie['uzytkownik_id'].'</td>
-              <td>'.$rozwiazanie['praca_domowa_nr'].'</td>
+              <td>'.$rozwiazanie['praca_domowa_id'].'</td>
               <td>'.$rozwiazanie['tresc'].'</td>
               <td>'.$rozwiazanie['data_przeslania'].'</td>
             </tr>';
@@ -43,7 +41,7 @@ class Wykladowca
             <thead>
               <tr>
                 <td>Użytkownik_id</td>
-                <td>Praca_domowa_nr</td>
+                <td>Praca_domowa_id</td>
                 <td>Treść</td>
                 <td>Data_przesłania</td>
               </tr>
@@ -62,8 +60,6 @@ class Wykladowca
     public function listaPracDomowych()
     {
         // TODO: Wypisanie na ekranie listy elementów z tabeli praca_domowa
-        // - klasa Database do pobrania danych, echo 'tresc strony';
-        // Jak pobrać dane można zobaczyć w logowaniu - SELECT * FROM itd.
 
         $bazaDanych = new Database();
         $bazaDanych->connect();
@@ -89,7 +85,7 @@ class Wykladowca
           <table border=1>
             <thead>
               <tr>
-                <td>Id</td>
+                <td>Id pracy domowej</td>
                 <td>Użytkownik_id</td>
                 <td>Data zadania</td>
                 <td>Temat</td>
@@ -113,9 +109,9 @@ class Wykladowca
         // Przykład formularza jest w rejestracji albo logowaniu
 
         echo '
-          <form action="'.Ustawienia::get('appURL').'nowa-praca-domowa-formularz/" method="POST">
-              <input type="text" name="data zadania" placeholder="Data zadania">
-              <input type="text" name="tytul" placeholder="Temat">
+          <form action="'.Ustawienia::get('appURL').'nowa-praca-domowa/" method="POST">
+              <input type="text" name="data-zadania" placeholder="Data zadania">
+              <input type="text" name="temat" placeholder="Temat">
               <input type="submit">
           </form>
         ';
@@ -126,27 +122,33 @@ class Wykladowca
      */
     public function nowaPracaDomowa()
     {
+
         $dataZadania = $_POST['data-zadania'];
         $temat = $_POST['temat'];
 
-        // TODO: Dodanie nowej pracy domowej do bazy danych (do tabeli praca_domowa)
-        //  - klasa Database - podobnie jak przy rejestracji INSERT INTO itd.
+
 
         // TODO: Przekierowanie na stronę z pracami domowymi - funkcja header();
 
         $bazaDanych = new Database();
         $bazaDanych->connect();
 
-        $zapytanie = 'INSERT INTO `praca_domowa` (`data-zadania`, `temat`) VALUES (:data-zadania, :temat)';
+        $zapytanie = 'INSERT INTO `praca_domowa` (`data_zadania`, `temat`) VALUES (:data_zadania, :temat)';
         $obiektZapytania = $bazaDanych->pdo->prepare($zapytanie);
-        $obiektZapytania->bindValue(':data-zadania', $dataZadania, \PDO::PARAM_STR);
+        $obiektZapytania->bindValue(':data_zadania', $dataZadania, \PDO::PARAM_STR);
         $obiektZapytania->bindValue(':temat', $temat, \PDO::PARAM_STR);
 
 
-        $obiektZapytania->execute();
+        $wynikZapytania = $obiektZapytania->execute();
 
-        \header('Location: '.Ustawienia::get('appURL').'prace-domowe');
 
+        if ($wynikZapytania > 0) {
+          Wiadomosc::sukces('Pomyślnie dodano rozwiązanie!');
+          header('Location: ' . Ustawienia::get('appURL') . 'moje-prace');
+        } else {
+          Wiadomosc::blad('Wystąpił błąd podczas dodawania rozwiązania!');
+          header('Location: ' . Ustawienia::get('appURL') . 'dodaj-rozwiazanie-formularz');// http:localhost/zarejestruj
+        }
     }
     /**
      * Usunięcie pracy domowej.
@@ -156,5 +158,20 @@ class Wykladowca
         // TODO: Usunięcie z bazy danych pracy domowej
         // Trzeba uważać, ponieważ praca domowa może mieć przesłane rozwiązania
         //  - wtedy nie można jej usunąć
+        //
+        //  Najpierw należy pobrać z linku id pracy domowej (tak jak dla formularza dodawania rozwiązania)
+        $idPracyDomowej = $_POST['id'];
+        //  Należy się połączyć z bazą danych
+        $bazaDanych = new Database();
+        $bazaDanych->connect();
+        //  Potem trzeba usunąć rozwiązania z bazy powiażane z tą pracą domową
+        $zapytanieUsuwaniaRozwiazan = 'DELETE FROM rozwiazanie WHERE praca_domowa_id = :id';
+
+
+        //  Potem trzeba usunąć samą pracę domową
+        $zapytanieUsuwaniaPracyDomowej = 'DELETE FROM praca_domowa WHERE id = :id';
+
+
     }
+
 }

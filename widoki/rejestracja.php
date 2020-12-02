@@ -3,15 +3,26 @@
 <div class="container d-flex justify-content-center flex-column mt-5 p-5 col-md-4 border rouned">
 
   <h3>Zarejestruj się</h3>
-  <form class="" action="<?php echo APP_URL ?>zarejestruj-sie" method="post">
+  <form class="" action="<?php echo APP_URL ?>rejestracja" method="post">
+
+    <div class="form-group">
+      <label for="haslo2">Imię</label>
+      <input type="text" name="haslo2" id="haslo2" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="haslo2">Nazwisko</label>
+      <input type="text" name="haslo2" id="haslo2" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email" class="form-control" />
+    </div>
+
      <div class="form-group">
        <label for="login">Login</label>
        <input type="text" name="login" id="login" class="form-control" />
-     </div>
-
-     <div class="form-group">
-       <label for="email">Email</label>
-       <input type="text" name="email" id="email" class="form-control" />
      </div>
 
      <div class="form-group">
@@ -23,6 +34,7 @@
        <label for="haslo2">Powtórz hasło</label>
        <input type="text" name="haslo2" id="haslo2" class="form-control" />
      </div>
+
 
      <div class="form-group">
        <label for="regulamin" class="d-flex flex-row">Akceptuję regulamin

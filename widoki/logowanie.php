@@ -3,7 +3,7 @@
 <div class="container d-flex justify-content-center flex-column mt-5  p-5 col-md-4 border rounded">
 
   <h3>Zaloguj się</h3>
-  <form class="" action="<?php echo APP_URL ?>zaloguj-sie" method="post">
+  <form class="" action="<?php echo APP_URL ?>logowanie" method="post">
     <div class="form-group">
       <label for="login">Podaj login</label>
       <input id="login" class="form-control" type="text" name="login" placeholder="Login" />

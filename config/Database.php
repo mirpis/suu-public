@@ -52,6 +52,7 @@ class Database
     $stmt = $this->pdo->prepare($sql);
     // execute wykonuje zapytanie wykorzystując podane parametry np. $params
     if (! $result = $stmt->execute($params)) {
+      //d($stmt->errorInfo());
       throw new \Exception("Błąd zapytania do bazy danych");
     }
 

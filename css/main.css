@@ -1,14 +1,25 @@
 body
 {
-  background-color: #2F3336;
-  color: #efefef;
+  background-image: url("../img/74209251_2435958553308572_1469647597198114816_n.jpg" );
+  /*
   font-family: 'Open Sans', sans-serif;
-  font-size: 17px;
+  font-size: 17px; */
 }
+
+a, .nav-link {
+  color: #C0D06F;
+}
+
+/* .img-fluid
+{
+  max-width: 100%;
+  height: auto;
+} */
 
 h1
 {
-  font-size: 36px;
+  font-family: 'Cinzel', serif;
+  font-size: 40px;
   font-weight: 400;
   color: #C0D06F;
   margin: 20px;
@@ -21,8 +32,8 @@ h5
   font-weight: 100;
   color: #C0D06F;
   letter-spacing: 3px;
-  /* margin: 20px; */
-  margin-top: 0px
+  margin: 20px;
+  margin-top: 1px
 }
 
 .error
@@ -32,40 +43,45 @@ h5
   margin-bottom: 10px;
 }
 
-
-
-.listopad-2019
+.footer
 {
- text-align: center;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* .listopad-2019
+{
+ text-align: center; */
 /*display: inline-block; kafelki układają się obok siebie*/
 /*display: block;*/
 /* width: 32%; w jednym rzędzie mieszczą się max. 3 kafelki*/
-}
-.listopad-2019 odt
+/* } */
+/* .listopad-2019 odt
 {
   width: 100%; /* zdjęcie ma zajmować 100% dostępnej szerokości dla zdjęcia w np: col-sm-6
                    bo inaczej przeglądarka użyła by rozmiaru orginalnej grafiki*/
-  height: auto;
-}
-.listopad-2019 p
+  /* height: auto;
+}  */
+/* .listopad-2019 p
 {
   margin-bottom: 30px;
-}
-.listopad-2019 figcaption
+} */
+/* .listopad-2019 figcaption
 {
   margin-top: 8px;
-}
-.listopad-2019 figure
+} */
+/* .listopad-2019 figure
 {
   margin-top: 10px; /* marginesy do okoła obrazów są domyślnie dużo większe*/
 
-}
+/* }  */
 
-.img-74209251_2435958553308572_1469647597198114816_n {
+/* .img-74209251_2435958553308572_1469647597198114816_n {
   min-width: 100vw;
   min-height: 100vh;
-  background: linear-gradient( rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5) ),url('../img/74209251_2435958553308572_1469647597198114816_n.jpg') no-repeat center center fixed;
-}
+  background: linear-gradient( rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5) ),
+  url('../img/74209251_2435958553308572_1469647597198114816_n.jpg') no-repeat center center fixed;
+} */
 /*
 SPRAWIA ŻE: SUBMENU Kolekcje na wszystkie pory roku ROZWIJE SIĘ PO WYŁĄCZNIE NAJECHANIU MYSZKĄ BEZ KLIKNIĘCIA
 .navbar-nav li:hover>.dropdown-menu

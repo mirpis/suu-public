@@ -20,7 +20,7 @@ class Ustawienia
     'dbType' => 'mysql',
     'dbName' => 'suu',
     'dsn' => 'mysql:dbname=suu;hostname=localhost;charset=utf8',//'mysql:dbname=id11562510_app;hostname=localhost;charset=utf8',
-    'appURL' => 'https://localhost/suu/'//'https://ubraniadospania.000webhostapp.com/app/'
+    'appURL' => 'http://localhost/suu/'//'https://ubraniadospania.000webhostapp.com/app/'
     // ..
   ];
   /**

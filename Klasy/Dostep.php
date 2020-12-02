@@ -11,51 +11,55 @@ class Dostep
 {
     public function logowanieFormularz()
     {
-        // require './widoki/logowanie.php';
-        echo '
-          <form action="'.Ustawienia::get('appURL').'logowanie/" method="POST">
-              <input type="text" name="login" placeholder="Login">
-              <input type="password" name="haslo" placeholder="Hasło">
-              <input type="submit">
-          </form>
-        ';
+         require './widoki/logowanie.php';
+        // echo '
+        //   <form action="'.Ustawienia::get('appURL').'logowanie/" method="POST">
+        //       <input type="text" name="login" placeholder="Login">
+        //       <input type="password" name="haslo" placeholder="Hasło">
+        //       <input type="submit">
+        //   </form>
+        // ';
     }
 
     public function rejestracjaFormularz()
     {
-        // require './widoki/logowanie.php';
-        echo '
-          <form action="'.Ustawienia::get('appURL').'rejestracja/" method="POST">
-              <input type="text" name="login" placeholder="Login">
-              <input type="password" name="haslo" placeholder="Hasło">
-              <input type="password" name="haslo-powtorz" placeholder="Powtórz hasło">
-              <input type="text" name="imie" placeholder="Imię">
-              <input type="text" name="nazwisko" placeholder="Nazwisko">
-              <input type="submit">
-          </form>
-        ';
+       require './widoki/rejestracja.php';
+        // echo '
+        //   <form action="'.Ustawienia::get('appURL').'rejestracja/" method="POST">
+        //       <input type="text" name="login" placeholder="Login">
+        //       <input type="password" name="haslo" placeholder="Hasło">
+        //       <input type="password" name="haslo-powtorz" placeholder="Powtórz hasło">
+        //       <input type="text" name="imie" placeholder="Imię">
+        //       <input type="text" name="nazwisko" placeholder="Nazwisko">
+        //       <input type="submit">
+        //   </form>
+        // ';
     }
 
     public function rejestracja()
     {
+
         $login = $_POST['login'];
         $haslo = $_POST['haslo'];
         $hasloPowtorz = $_POST['haslo-powtorz'];
         $imie = $_POST['imie'];
         $nazwisko = $_POST['nazwisko'];
+        $email = $_POST['email'];
 
         // TODO: Sprawdzić czy dane są poprawne
 
         $bazaDanych = new Database();
         $bazaDanych->connect();
-
-        $zapytanie = 'INSERT INTO `uzytkownik` (`login`, `haslo`, `imie`, `nazwisko`) VALUES (:login, :haslo, :imie, :nazwisko)';
+      // NIE DODAJE NOWEGO STUDENTA DO BAZY DANYCH
+        $zapytanie = 'INSERT INTO `uzytkownik` (`login`, `haslo`, `imie`, `nazwisko`,`email`)
+         VALUES (:login, :haslo, :imie, :nazwisko, :email)';
         $obiektZapytania = $bazaDanych->pdo->prepare($zapytanie);
         $obiektZapytania->bindValue(':login', $login, \PDO::PARAM_STR);
         $obiektZapytania->bindValue(':haslo', md5($login.md5($haslo)), \PDO::PARAM_STR);
         $obiektZapytania->bindValue(':imie', $imie, \PDO::PARAM_STR);
         $obiektZapytania->bindValue(':nazwisko', $nazwisko, \PDO::PARAM_STR);
-
+        $obiektZapytania->bindValue(':email', $email, \PDO::PARAM_STR);
+// d($obiektZapytania);
         $obiektZapytania->execute();
 
         \header('Location: '.Ustawienia::get('appURL'));
@@ -102,7 +106,7 @@ class Dostep
 
     public function wylogowanie()
     {
-        // W klasie Sesja w funkcji unset
+        // W klasie Sesja w funkcji unset($name)
         // argument o nazwie $name ma mieć wartość 'id'
         Sesja::unset('id');
         // argument o nazwie $name ma mieć wartość 'imie'
