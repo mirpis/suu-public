@@ -6,18 +6,58 @@ display: inline, inline-block, inline-table lub komórek tabeli -->
 
  <!-- <div class="row"> -->
  <!-- <div class="cat-bottom"></div> -->
- <a href="<?php echo APP_URL ?>" class="nav-link active text-light font-weight-bold mt-3">
-    Prace Studentów
- </a>
+      
 
- <a href="<?php echo APP_URL ?>listopad-2019/" class="nav-link active">
-    listopad 2019
- </a>
+<!-- A vertical navbar -->
+<div class="d-flex flex-column">
+   <nav class="navbar bg-danger">
+       <?php
+         if (isset($_SESSION["id"])) {
+       ?> 
+      <ul class="navbar-nav">
+         
+         <span class="h1 ml-5 navbar-text  font-weight-bold mt-3"><b>Studenci</b></span>
 
- <a href="<?php echo APP_URL ?>grudzien-2019/" class="nav-link active">
-    grudzień 2019
- </a>
+         <li class="nav-item">
+            <a class="nav-link active" href="<?php echo APP_URL ?>prace-domowe-zadane/">
+               Prace domowe zadane</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="<?php echo APP_URL ?>moje-prace/" >
+               Moje prace</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="<?php echo APP_URL ?>dodaj-rozwiazanie-formularz/">
+               Dodaj rozwiązanie formularz</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="<?php echo APP_URL ?>dodaj-rozwiazanie/">
+               Dodaj rozwiązanie</a>
+         </li>
+       
+       <?php }?>
 
- <a href="<?php echo APP_URL ?>styczen-2020/" class="nav-link active">
-    styczeń 2020
- </a>
+       <?php
+       if (isset($_SESSION["id"])) { 
+       ?>
+         <span class="h1 ml-5 pt-5 navbar-text  font-weight-bold mt-3"><b>Wykładowca</b></span>
+         
+         <li class="nav-item">
+            <a class="nav-link active" href="<?php echo APP_URL ?>lista-rozwazan/">
+              Lista rozwiązań</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="<?php echo APP_URL ?>lista-prac-domowych/">
+              Lista prac domowych</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="<?php echo APP_URL ?>nowa-praca-domowa-formularz/">
+              Nowa praca domowa formularz</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="<?php echo APP_URL ?>usun-prace-domowa/">
+              Usuń pracę domową</a>
+         </li>
+       <?php } ?> 
+   </nav>
+</div>

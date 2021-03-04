@@ -13,7 +13,7 @@
     <!-- initial-scale=1 - CZYLI BEZ ŻADNYCH ZOOMÓW ANI ODDALEŃ  -->
 
     <!-- shrink-to-fit=no - WYŁANCZAMY MECHANIZM: "ZMNIEJSZ SIĘ ABY SIĘ DOPASOWAĆ""
-  BO MOŻE ZAKŁÓCIĆ RESPONSYWNOŚĆ-->
+          BO MOŻE ZAKŁÓCIĆ RESPONSYWNOŚĆ-->
 
     <title>SUU Szkoła Uzdrowienia i Uwolnienia</title>
     <meta name="description" content="Strona dla wykładowców i studentów szkoły SUU">
@@ -21,67 +21,66 @@
     <meta name="author" content="Mirosław Pisula">
     <meta http-equiv="X-Ua-Compatible" content="IE-edge">
 
-    <!-- <style type="text/css">
-           body{
-             background-image: url("./img/74209251_2435958553308572_1469647597198114816_n.jpg");
-           }
-    </style> -->
+
     <link rel="stylesheet" href="<?php echo APP_URL; ?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo APP_URL; ?>css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 
+       <!-- <body background="./img/suu3.jpg">
+       </body> -->
 
+        
 
   </head>
   <body>
-      <!-- <img src="../img/74209251_2435958553308572_1469647597198114816_n.jpg"
-                                         class="card-img" alt="Responsive image"> -->
+    <!-- 100vh - PROCENTOWA WYSOKOŚC STRONY / CAŁA WYSOKOŚĆ -->
+    <!-- 100vw - PROCENTOWA SZEROKOŚĆ STRONY / CAŁA SZEROKOŚĆ-->
+    <?php
+        if (isset($_SESSION['sukces']))
+          {
+          foreach ($_SESSION['sukces'] as $wiadomosc)
+          {
+      ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <?php echo $wiadomosc ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+      <?php
+          }
+        }
 
-       <!-- <style type="text/css">
-        body{
-             background-image: url("./img/74209251_2435958553308572_1469647597198114816_n.jpg");
-            }
-       </style> -->
-  <!-- 100vh - PROCENTOWA WYSOKOŚC STRONY / CAŁA WYSOKOŚĆ -->
-  <!-- 100vw - PROCENTOWA SZEROKOŚĆ STRONY / CAŁA SZEROKOŚĆ-->
-       <?php
-       if (isset($_SESSION['sukces'])) {
-         foreach ($_SESSION['sukces'] as $wiadomosc) {
-           ?>
-           <div class="alert alert-success alert-dismissible fade show" role="alert">
-             <?php echo $wiadomosc ?>
-             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-             </button>
-           </div>
-           <?php
-         }
-       }
-       if (isset($_SESSION['blad'])) {
-         foreach ($_SESSION['blad'] as $wiadomosc) {
-           ?>
-           <div class="alert alert-danger alert-dismissible fade show" role="alert">
-             <?php echo $wiadomosc ?>
-             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-             </button>
-           </div>
-           <?php
-         }
-       }
-       if (isset($_SESSION['uwaga'])) {
-         foreach ($_SESSION['uwaga'] as $wiadomosc) {
-           ?>
-           <div class="alert alert-warning alert-dismissible fade show" role="alert">
-             <?php echo $wiadomosc ?>
-             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-             </button>
-           </div>
-           <?php
-         }
-       }
-       unset($_SESSION['sukces']);
-       unset($_SESSION['blad']);
-       unset($_SESSION['uwaga']);
-        ?>
+        if (isset($_SESSION['blad']))
+          {
+          foreach ($_SESSION['blad'] as $wiadomosc)
+          {
+      ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <?php echo $wiadomosc ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+      <?php
+          }
+        }
+
+        if (isset($_SESSION['uwaga']))
+        {
+          foreach ($_SESSION['uwaga'] as $wiadomosc)
+          {
+      ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <?php echo $wiadomosc ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+      <?php
+          }
+        }
+        unset($_SESSION['sukces']);
+        unset($_SESSION['blad']);
+        unset($_SESSION['uwaga']);
+      ?>
