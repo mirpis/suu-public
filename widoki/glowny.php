@@ -15,7 +15,7 @@
     <!-- shrink-to-fit=no - WYŁANCZAMY MECHANIZM: "ZMNIEJSZ SIĘ ABY SIĘ DOPASOWAĆ""
           BO MOŻE ZAKŁÓCIĆ RESPONSYWNOŚĆ-->
 
-    <title>SUU Szkoła Uzdrowienia i Uwolnienia kkkkkkkkkkkk</title>
+    <title>SUU Szkoła Uzdrowienia i Uwolnienia bbbbbbbbb</title>
     <meta name="description" content="Strona dla wykładowców i studentów szkoły SUU">
     <meta name="keywords" content="Prace studentów">
     <meta name="author" content="Mirosław Pisula">
